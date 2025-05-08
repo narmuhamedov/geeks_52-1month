@@ -24,3 +24,16 @@ class Book(models.Model):
     class Meta:
         verbose_name = 'книгу'
         verbose_name_plural = 'книги'
+
+
+class Reviews(models.Model):
+    books_choice = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews')
+    user_name = models.CharField(max_length=100, verbose_name='как вас зовут?')
+    text = models.TextField(verbose_name='как вам книга?')
+
+    def __str__(self):
+        return f'{self.books_choice}-{self.user_name}'
+    
+    class Meta:
+        verbose_name = 'комментарий'
+        verbose_name_plural = 'комментарии'

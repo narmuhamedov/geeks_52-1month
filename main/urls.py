@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('first_lesson.urls')),
     path('', include('books.urls')),
+    path('', include('tags.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
