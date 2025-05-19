@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'first_lesson',
     'books',
     'tags',
+    'parser_app',
 ]
 
 MIDDLEWARE = [
