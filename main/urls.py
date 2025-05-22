@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('books.urls')),
     path('', include('tags.urls')),
     path('', include('parser_app.urls')),
+    path('', include('users.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
