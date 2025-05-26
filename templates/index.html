@@ -23,13 +23,18 @@
         <p>{{ text }}</p>
         <p>Используя backend</p>
     </div>
- 
+    <img src="{% static 'images/image1.jpg' %}" alt="">
+    
       <!-- Бегущая строка -->
     <div class="marquee-container">
         <div class="marquee">
           {{ run_string }}
         </div>
+        
+    
+
     </div>
+
 
     <!-- Футер -->
     {% include 'components/footer.html' %}

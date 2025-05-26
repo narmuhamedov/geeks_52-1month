@@ -17,6 +17,9 @@ class Book(models.Model):
     audio_book = models.URLField(verbose_name='Вставьте ссылку аудио книги')
     page_number = models.PositiveIntegerField(verbose_name='Укажите кол-во страниц', default=200, 
                                               null=True)
+    views = models.PositiveIntegerField(
+        default=0, verbose_name="Количество просмотров", null=True
+    )  # Поле просмотров
     
     def __str__(self):
         return self.title

@@ -7,6 +7,7 @@ class RezkaListView(generic.ListView):
     template_name = 'parser_library/parser_book_list.html'
     context_object_name = 'rezka'
     model = models.Parser_Rezka
+    paginate_by = 5
 
     def get_queryset(self):
         return self.model.objects.all()

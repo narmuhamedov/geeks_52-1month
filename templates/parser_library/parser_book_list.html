@@ -1,19 +1,46 @@
-
-<!-- Карточки фильмов -->
 <section class="cards">
-
-<!-- цикл тут открытие -->
- {% for i in rezka %}
+  <!-- Карточки фильмов -->
+  {% for i in rezka %}
     <div class="card">
-        <h3>{{ i.title }}</h3>
+      <h3>{{ i.title }}</h3>
     </div>
-{% endfor %}
+  {% endfor %}
 
+  <!-- Пагинация -->
+  {% if page_obj.has_other_pages %}
+    <div class="pagination" style="margin-top: 20px;">
+      {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+      {% endif %}
 
-<!-- цикл тут закрытие -->
+      <span class="current">
+        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+      </span>
 
-
-
-
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+      {% endif %}
+    </div>
+  {% endif %}
 </section>
 
+<style>
+  .pagination {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+  }
+
+  .pagination a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: blue;
+  }
+
+  .pagination .current {
+    margin: 0 10px;
+    font-weight: bold;
+  }
+</style>

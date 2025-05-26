@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from . import models, forms
 from django.http import HttpResponse
 from django.views import generic
+from django.db.models import F
 
 #CRUD - Create, Read, Update, Delete
 
@@ -132,10 +133,21 @@ class BookListView(generic.ListView):
 # получение id и вывод detail
 class BookDetailView(generic.DetailView):
     template_name = 'books/book_detail.html'
+    model = models.Book
+    pk_url_kwarg = 'id'  # если в URL параметр называется 'id'
 
-    def get_object(self, **kwargs):
-        book_id = self.kwargs.get('id')
-        return get_object_or_404(models.Book, id=book_id)
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        book = self.object
+        viewed_books = request.session.get("viewed_books", [])
+        if book.id not in viewed_books:
+            book.views = F("views") + 1
+            book.save()
+            book.refresh_from_db()
+
+            viewed_books.append(book.id)
+            request.session["viewed_books"] = viewed_books
+        return response
 
 
 
